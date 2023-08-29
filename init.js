@@ -34,8 +34,8 @@ function initStorybook() {
     const storiesGlob = `${storiesPath}/**/*.stories.@(js|jsx|mjs|ts|tsx)`;
 
     // Load the main and preview template files
-    const mainTemplatePath = path.join(__dirname, '.config', `main-${configFileExtension}`);
-    const previewTemplatePath = path.join(__dirname, '.config', `preview-${configFileExtension}`);
+    const mainTemplatePath = path.join(__dirname, '.storybook', `main-${configFileExtension}`);
+    const previewTemplatePath = path.join(__dirname, '.storybook', `preview-${configFileExtension}`);
 
     const mainTemplate = fs.readFileSync(mainTemplatePath, 'utf8');
     const previewTemplate = fs.readFileSync(previewTemplatePath, 'utf8');
@@ -109,15 +109,15 @@ function detectPackageManager() {
     return 'pnpm'
 }
 
-function addScripts(packageManager) {
+function addScripts() {
     // Update package.json with the script
     const packageJsonPath = path.join(process.cwd(), 'package.json');
     const packageJson = require(packageJsonPath);
 
     if (packageJson) {
         packageJson.scripts = packageJson.scripts || {};
-        packageJson.scripts.storybook = `${packageManager} storybook dev --port 6006`;
-        packageJson.scripts.buildStorybook = `${packageManager} storybook build`;
+        packageJson.scripts.storybook = `storybook dev --port 6006`;
+        packageJson.scripts.buildStorybook = `storybook build`;
         fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
         console.log(`${CHECKMARK} Storybook scripts added to package.json`);
     } else {

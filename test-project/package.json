@@ -7,8 +7,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "storybook": "pnpm storybook dev --port 6006",
-    "buildStorybook": "pnpm storybook build"
+    "storybook": "storybook dev --port 6006",
+    "buildStorybook": "storybook build"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
