@@ -17,5 +17,5 @@
         "fs": "0.0.1-security",
         "path": "^0.12.7"
     },
-    "files": ["index.js", "init.js"]
+    "files": ["index.js", "init.js", ".config/*"]
 }
