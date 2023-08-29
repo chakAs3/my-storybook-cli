@@ -1,6 +1,6 @@
 {
     "name": "storybook-nuxt",
-    "version": "0.0.5-alpha.1",
+    "version": "0.0.5-alpha.2",
     "description": "Storybook init CLI for Nuxt ",
     "bin": {
         "storybook-nuxt": "./index.js"
