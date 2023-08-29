@@ -61,6 +61,7 @@ function initStorybook() {
     console.log('Install dependencies 📦️')
 
     const packageManager = detectPackageManager();
+
     // Install required packages using pnpm
     const installProcess = spawn(packageManager, ['add',
         'storybook@next',
@@ -81,6 +82,7 @@ function initStorybook() {
             console.error(`${CROSSMARK} Package installation failed with code ${code}`);
         } else {
             console.log(`${CHECKMARK} Packages installed successfully!`);
+            addScripts(packageManager);
             console.log()
             console.log('✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨')
             console.log('✨✨       🚀️ You can run storybook using           ✨✨')
@@ -105,6 +107,22 @@ function detectPackageManager() {
         return 'pnpm';
     }
     return 'pnpm'
+}
+
+function addScripts(packageManager) {
+    // Update package.json with the script
+    const packageJsonPath = path.join(process.cwd(), 'package.json');
+    const packageJson = require(packageJsonPath);
+
+    if (packageJson) {
+        packageJson.scripts = packageJson.scripts || {};
+        packageJson.scripts.storybook = `${packageManager} storybook dev --port 6006`;
+        packageJson.scripts.buildStorybook = `${packageManager} storybook build`;
+        fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
+        console.log(`${CHECKMARK} Storybook scripts added to package.json`);
+    } else {
+        console.log(`Sorry, this feature is currently only supported with pnpm.`);
+    }
 }
 
 module.exports = { initStorybook };

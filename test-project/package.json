@@ -6,7 +6,9 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "storybook": "pnpm storybook dev --port 6006",
+    "buildStorybook": "pnpm storybook build"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
